@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+    {% load static %}
+
+    {% block contenidoQueCambia %}
+        <h3 style="color:white;">CURSOS</h3>
+
+        {% if cursos %}
+        <table style="width: 100%; border-collapse: collapse; color: white;">
+            <thead>
+                <tr style="border-bottom: 1px solid white;">
+                    <th style="text-align:left; padding: 8px;">Nombre</th>
+                    <th style="text-align:left; padding: 8px;">Camada</th>
+                    <th style="text-align:left; padding: 8px;">Modalidad</th>
+                    <th style="text-align:left; padding: 8px;">Calificacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for curso in cursos %}
+                    <tr style="border-bottom: 1px solid #ccc;">
+                        <td style="padding: 8px;">{{ curso.nombre }}</td>
+                        <td style="padding: 8px;">{{ curso.camada }}</td>
+                        <td style="padding: 8px;">{{ curso.get_modalidad_display }}</td>
+                        <td style="padding: 8px;">{{ curso.calificacion }}</td>
+                        <td style="padding: 8px;"><a href="{% url 'editar_curso' curso.id%}" class="btn btn-warning btn-sm">Editar</a></td>
+                        <td style="padding: 8px;"><a href="{% url 'eliminar_curso' curso.id%}" class="btn btn-danger btn-sm">Eliminar</a></td>
+                        <td style="padding: 8px;"><a href="{% url 'ver_curso' curso.id%}" class="btn btn-info btn-sm">Ver</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>        
+        {% else %}
+            <p>No hay cursos disponibles</p>
+        {% endif %}
+
+        <br>
+        <br>
+        <a href="{% url 'crear_curso' %}" style="color: white;">Crear curso</a>
+
+    {% endblock %}
+

@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reseñas de películas y series</title>
+    <link rel="stylesheet" href="{% static 'resenas/css/styles.css' %}">
+</head>
+<body>
+
+<header>
+    <h1>Reseñas de películas y series</h1>
+    <p>Mi primera página web hecha con Django</p>
+</header>
+
+<nav>
+    <a href="{% url 'inicio' %}">Inicio</a>
+    <a href="{% url 'lista_peliculas' %}">Películas y series</a>
+    <a href="{% url 'crear_genero' %}">Crear género</a>
+    <a href="{% url 'crear_pelicula' %}">Crear película/serie</a>
+    <a href="{% url 'crear_resena' %}">Crear reseña</a>
+    <a href="{% url 'buscar_pelicula' %}">Buscar</a>
+</nav>
+
+<main>
+    {% block contenido %}
+    {% endblock %}
+</main>
+
+<footer>
+    <p>Proyecto Django - TuPrimeraPagina+Perez</p>
+</footer>
+
+</body>
+</html>

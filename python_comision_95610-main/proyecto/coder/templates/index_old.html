@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento</title>
+</head>
+<body>
+    <h1>Mi primer template!!!</h1>
+    <p style="color: red;">Me llamo {{nombre}}, {{apellido}}</p>
+    <p style="color: green;">Fecha y hora: {{fecha_hora}}</p>
+    <p style="color: blue;">Productos</p>
+    
+    {% if productos %}
+        {% for producto in productos %}
+            {{producto}}
+            <br>
+        {% endfor %}
+    {% else %}
+        <p style="color: crimson;">No hay productos seleccionados!!</p>
+    {% endif %}
+
+    {% for producto, precio in productos.items %}
+        <p style="color: crimson;">Producto: {{producto}} -- precio: {{precio}}</p>
+    {% endfor %}
+    
+</body>
+</html>

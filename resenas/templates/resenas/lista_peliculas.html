@@ -1,4 +1,4 @@
-{% extends "resenas/base.html" %}
+{% extends "base.html" %}
 
 {% block contenido %}
 
@@ -12,6 +12,8 @@
             <p><strong>Género:</strong> {{ pelicula.genero }}</p>
             <p><strong>Año:</strong> {{ pelicula.anio }}</p>
             <p>{{ pelicula.descripcion }}</p>
+            <a href="{% url 'editar_pelicula' pelicula.id %}" class="btn-action">Editar</a>
+            <a href="{% url 'eliminar_pelicula' pelicula.id %}" class="btn-action btn-danger">Eliminar</a>
         </div>
     {% endfor %}
 {% else %}

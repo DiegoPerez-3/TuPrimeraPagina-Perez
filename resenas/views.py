@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import PeliculaSerie, Resena
 from .forms import GeneroForm, PeliculaSerieForm, ResenaForm, BusquedaForm
 
@@ -84,3 +84,26 @@ def buscar_pelicula(request):
         "resultados": resultados,
         "busqueda_realizada": busqueda_realizada,
     })
+
+
+def editar_pelicula(request, id):
+    pelicula = get_object_or_404(PeliculaSerie, id=id)
+
+    if request.method == "POST":
+        form = PeliculaSerieForm(request.POST, instance=pelicula)
+        if form.is_valid():
+            form.save()
+            return redirect("lista_peliculas")
+    else:
+        form = PeliculaSerieForm(instance=pelicula)
+
+    return render(request, "resenas/formulario.html", {
+        "form": form,
+        "titulo": "Editar película o serie",
+    })
+
+
+def eliminar_pelicula(request, id):
+    pelicula = get_object_or_404(PeliculaSerie, id=id)
+    pelicula.delete()
+    return redirect("lista_peliculas")
