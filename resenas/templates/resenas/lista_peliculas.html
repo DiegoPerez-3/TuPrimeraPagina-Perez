@@ -1,0 +1,21 @@
+{% extends "resenas/base.html" %}
+
+{% block contenido %}
+
+<h2>Películas y series cargadas</h2>
+
+{% if peliculas %}
+    {% for pelicula in peliculas %}
+        <div class="card">
+            <h3>{{ pelicula.titulo }}</h3>
+            <p><strong>Tipo:</strong> {{ pelicula.tipo }}</p>
+            <p><strong>Género:</strong> {{ pelicula.genero }}</p>
+            <p><strong>Año:</strong> {{ pelicula.anio }}</p>
+            <p>{{ pelicula.descripcion }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No hay películas o series cargadas.</p>
+{% endif %}
+
+{% endblock %}

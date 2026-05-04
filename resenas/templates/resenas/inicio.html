@@ -1,0 +1,43 @@
+{% extends "resenas/base.html" %}
+
+{% block contenido %}
+
+<h2>Inicio</h2>
+
+<p>
+    Bienvenido a la página de reseñas de películas y series.
+    Desde esta web podés cargar géneros, películas, series y reseñas.
+</p>
+
+<h2>Últimas películas o series cargadas</h2>
+
+{% if peliculas %}
+    {% for pelicula in peliculas %}
+        <div class="card">
+            <h3>{{ pelicula.titulo }}</h3>
+            <p><strong>Tipo:</strong> {{ pelicula.tipo }}</p>
+            <p><strong>Género:</strong> {{ pelicula.genero }}</p>
+            <p><strong>Año:</strong> {{ pelicula.anio }}</p>
+            <p>{{ pelicula.descripcion }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No hay películas o series cargadas todavía.</p>
+{% endif %}
+
+<h2>Últimas reseñas</h2>
+
+{% if resenas %}
+    {% for resena in resenas %}
+        <div class="card">
+            <h3>{{ resena.pelicula.titulo }}</h3>
+            <p><strong>Autor:</strong> {{ resena.autor }}</p>
+            <p><strong>Puntaje:</strong> {{ resena.puntaje }}/10</p>
+            <p>{{ resena.comentario }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No hay reseñas cargadas todavía.</p>
+{% endif %}
+
+{% endblock %}

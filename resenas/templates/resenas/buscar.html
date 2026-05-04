@@ -1,0 +1,30 @@
+{% extends "resenas/base.html" %}
+
+{% block contenido %}
+
+<h2>Buscar película o serie</h2>
+
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit">Buscar</button>
+</form>
+
+{% if busqueda_realizada %}
+    <h2>Resultados</h2>
+
+    {% if resultados %}
+        {% for pelicula in resultados %}
+            <div class="card">
+                <h3>{{ pelicula.titulo }}</h3>
+                <p><strong>Tipo:</strong> {{ pelicula.tipo }}</p>
+                <p><strong>Género:</strong> {{ pelicula.genero }}</p>
+                <p><strong>Año:</strong> {{ pelicula.anio }}</p>
+                <p>{{ pelicula.descripcion }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No se encontraron resultados.</p>
+    {% endif %}
+{% endif %}
+
+{% endblock %}
