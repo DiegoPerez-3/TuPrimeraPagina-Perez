@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card">
+        <h2>{{ mensaje.subject }}</h2>
+        <p><strong>De:</strong> {{ mensaje.sender.username }}</p>
+        <p><strong>Para:</strong> {{ mensaje.recipient.username }}</p>
+        <p><strong>Fecha:</strong> {{ mensaje.created_at|date:"d/m/Y H:i" }}</p>
+        <hr>
+        <div style="margin-top: 15px;">
+            {{ mensaje.body|linebreaks }}
+        </div>
+        <div style="margin-top: 20px;">
+            <a href="{% url 'inbox' %}" class="btn-action">Volver a la bandeja</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card" style="text-align: center;">
+        <h2>Perfil de {{ user.username }}</h2>
+        
+        {% if user.profile.avatar %}
+            <img src="{{ user.profile.avatar.url }}" alt="Avatar de {{ user.username }}" style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin-bottom: 15px;">
+        {% else %}
+            <div style="border-radius: 50%; width: 150px; height: 150px; background-color: #ddd; margin: 0 auto 15px auto; line-height: 150px; color: #777;">Sin Avatar</div>
+        {% endif %}
+
+        <p><strong>Nombre:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Biografía:</strong> {{ user.profile.biografia|default:"No hay biografía." }}</p>
+        
+        {% if user.profile.link %}
+            <p><strong>Link:</strong> <a href="{{ user.profile.link }}" target="_blank">{{ user.profile.link }}</a></p>
+        {% endif %}
+        
+        {% if user.profile.fecha_nacimiento %}
+            <p><strong>Fecha de nacimiento:</strong> {{ user.profile.fecha_nacimiento|date:"d/m/Y" }}</p>
+        {% endif %}
+
+        <div style="margin-top: 20px;">
+            <a href="{% url 'profile_edit' %}" class="btn-action">Editar Perfil</a>
+            <a href="{% url 'password_change' %}" class="btn-action" style="background-color: #5bc0de;">Cambiar Contraseña</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,321 +1,86 @@
-# TuPrimeraPagina+Perez
-
-Proyecto realizado para la tercera entrega del curso de Python.
-
-## Descripción
-
-Esta es una página web desarrollada con Django para cargar y consultar reseñas de películas y series.
-
-El proyecto permite:
-
-- Crear géneros.
-- Crear películas o series.
-- Crear reseñas.
-- Buscar películas o series por título.
-- Ver un listado de películas y series cargadas.
-- Administrar los datos desde el panel de administración de Django.
-
-## Tecnologías utilizadas
-
-- Python
-- Django
-- SQLite
-- HTML
-- CSS básico
-
-## Patrón utilizado
-
-El proyecto utiliza el patrón MVT de Django:
-
-- **Model**: define la estructura de los datos.
-- **View**: contiene la lógica de las páginas.
-- **Template**: muestra la información en HTML.
-
-## Modelos creados
-
-En el archivo `resenas/models.py` se crearon 3 modelos:
-
-### 1. Genero
-
-Representa el género de una película o serie.
-
-Campos principales:
-
-- `nombre`
-- `descripcion`
-
-### 2. PeliculaSerie
-
-Representa una película o serie cargada en la web.
-
-Campos principales:
-
-- `titulo`
-- `tipo`
-- `genero`
-- `anio`
-- `descripcion`
-- `fecha_creacion`
-
-### 3. Resena
-
-Representa una reseña realizada sobre una película o serie.
-
-Campos principales:
-
-- `pelicula`
-- `autor`
-- `comentario`
-- `puntaje`
-- `fecha`
-
-## Formularios disponibles
-
-En el archivo `resenas/forms.py` se crearon los siguientes formularios:
-
-- `GeneroForm`: permite crear géneros.
-- `PeliculaSerieForm`: permite crear películas o series.
-- `ResenaForm`: permite crear reseñas.
-- `BusquedaForm`: permite buscar películas o series por título.
-
-## Herencia de HTML
-
-El proyecto utiliza herencia de plantillas.
-
-El archivo principal es:
-
-```text
-resenas/templates/resenas/base.html
-```
-
-Desde ese archivo heredan las demás páginas:
-
-```text
-inicio.html
-formulario.html
-lista_peliculas.html
-buscar.html
-```
-
-Esto permite reutilizar la estructura general de la página, como el encabezado, el menú de navegación y el pie de página.
-
-## Orden recomendado para probar la página
-
-Para probar correctamente el proyecto, se recomienda seguir este orden:
-
-### 1. Crear un género
-
-Entrar a:
-
-```text
-/crear-genero/
-```
-
-Ejemplo de datos:
-
-```text
-Nombre: Ciencia ficción
-Descripción: Películas y series relacionadas con tecnología, futuro o viajes espaciales.
-```
-
-### 2. Crear una película o serie
-
-Entrar a:
-
-```text
-/crear-pelicula/
-```
-
-Ejemplo de datos:
-
-```text
-Título: Dark
-Tipo: Serie
-Género: Ciencia ficción
-Año: 2017
-Descripción: Serie alemana sobre viajes en el tiempo y misterios familiares.
-```
-
-### 3. Crear una reseña
-
-Entrar a:
-
-```text
-/crear-resena/
-```
-
-Ejemplo de datos:
-
-```text
-Película: Dark
-Autor: Diego
-Comentario: Muy buena serie, con una historia compleja y atrapante.
-Puntaje: 9
-```
-
-### 4. Buscar una película o serie
-
-Entrar a:
-
-```text
-/buscar/
-```
-
-Ejemplo de búsqueda:
-
-```text
-Dark
-```
-
-### 5. Ver el listado completo
-
-Entrar a:
-
-```text
-/peliculas/
-```
-
-## URLs principales del proyecto
-
-| Funcionalidad | URL |
-|---|---|
-| Inicio | `/` |
-| Listado de películas y series | `/peliculas/` |
-| Crear género | `/crear-genero/` |
-| Crear película o serie | `/crear-pelicula/` |
-| Crear reseña | `/crear-resena/` |
-| Buscar película o serie | `/buscar/` |
-| Panel de administración | `/admin/` |
-
-## Cómo ejecutar el proyecto
-
-### 1. Clonar el repositorio
-
-```bash
-git clone URL_DEL_REPOSITORIO
-```
-
-Entrar a la carpeta del proyecto:
-
-```bash
-cd TuPrimeraPaginaPerez
-```
-
-### 2. Crear un entorno virtual
-
-```bash
-python -m venv venv
-```
-
-### 3. Activar el entorno virtual
-
-En Windows:
-
-```bash
-venv\Scripts\activate
-```
-
-Si se usa CMD:
-
-```bash
-venv\Scripts\activate.bat
-```
-
-### 4. Instalar dependencias
-
-```bash
-pip install -r requirements.txt
-```
-
-### 5. Aplicar migraciones
-
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
-### 6. Crear un superusuario
-
+# CineBlog - Entrega Final Django
+
+## Descripción general
+CineBlog es una aplicación web estilo blog desarrollada como entrega final para el curso de Python/Django de Coderhouse. Permite a los usuarios registrarse, publicar reseñas enriquecidas sobre películas y series, gestionar sus propios perfiles y enviarse mensajes privados.
+
+## Funcionalidades
+* Autenticación de usuarios (registro, login, logout, cambio de contraseña).
+* Creación y gestión de perfiles de usuario con avatar, biografía y enlaces.
+* Sistema CRUD completo (Crear, Leer, Actualizar, Borrar) para publicaciones (Pages) con permisos exclusivos para el autor.
+* Listado de publicaciones con buscador por título, subtítulo o categoría.
+* Editor de texto enriquecido (CKEditor) e imágenes para los artículos.
+* Sistema de mensajería interna entre usuarios registrados.
+
+## Apps del proyecto
+* **pages**: Maneja todo lo relacionado al blog, listado, creación y visualización de artículos.
+* **accounts**: Gestiona los usuarios, perfiles, registro y autenticación.
+* **messenger**: Proporciona el sistema de bandeja de entrada y envío de mensajes privados.
+
+## Modelos principales
+* `pages.Page`: Representa un artículo o reseña. Contiene título, subtítulo, texto enriquecido, imagen y vinculación con su autor.
+* `accounts.Profile`: Extiende el modelo User de Django con avatar, biografía, fecha de nacimiento y página web.
+* `messenger.Message`: Representa un mensaje privado con remitente, destinatario, asunto, cuerpo y estado (leído/no leído).
+
+## Rutas principales
+* `/`: Inicio del sitio (Home)
+* `/about/`: Acerca de
+* `/pages/`: Listado de artículos y buscador
+* `/pages/create/`: Crear un nuevo artículo
+* `/accounts/signup/`: Registro de usuario
+* `/accounts/login/`: Iniciar sesión
+* `/accounts/profile/`: Perfil de usuario
+* `/messages/`: Bandeja de entrada
+
+## Cómo instalar y ejecutar
+1. Clonar el repositorio.
+2. Crear un entorno virtual: `python -m venv venv`
+3. Activar el entorno virtual: `.\venv\Scripts\activate` (Windows) o `source venv/bin/activate` (Mac/Linux).
+4. Instalar las dependencias: `pip install -r requirements.txt`
+5. Ejecutar migraciones: `python manage.py migrate`
+6. Iniciar el servidor: `python manage.py runserver`
+
+## Cómo crear un superusuario
+Para poder acceder al panel de administración de Django (`/admin/`), debes crear un superusuario:
 ```bash
 python manage.py createsuperuser
 ```
 
-### 7. Ejecutar el servidor
+## Orden recomendado para probar
+1. Ejecutar migraciones.
+2. Crear superusuario.
+3. Entrar al home (`/`).
+4. Entrar a `/about/`.
+5. Entrar a `/pages/` y ver “No hay páginas aún”.
+6. Registrarse.
+7. Iniciar sesión.
+8. Crear una page con imagen y contenido enriquecido.
+9. Ver listado en `/pages/`.
+10. Click en “Leer más”.
+11. Editar la page.
+12. Borrar la page.
+13. Entrar al perfil.
+14. Editar perfil y avatar.
+15. Cambiar contraseña.
+16. Crear segundo usuario.
+17. Enviar mensaje entre usuarios.
+18. Ver bandeja de entrada.
+19. Entrar al admin y ver modelos registrados.
 
-```bash
-python manage.py runserver
-```
+## Usuario de prueba sugerido
+* Username: `usuario_prueba`
+* Email: `prueba@cineblog.com`
+*(No se incluyen contraseñas reales en la documentación)*
 
-### 8. Abrir la página
-
-En el navegador, entrar a:
-
-```text
-http://127.0.0.1:8000/
-```
-
-## Base de datos
-
-El proyecto utiliza SQLite, que es la base de datos por defecto de Django.
-
-Los datos se guardan en el archivo:
-
-```text
-db.sqlite3
-```
-
-Las tablas principales creadas corresponden a los modelos:
-
-- `Genero`
-- `PeliculaSerie`
-- `Resena`
-
-## Panel de administración
-
-Para entrar al panel de administración:
-
-```text
-http://127.0.0.1:8000/admin/
-```
-
-Desde ahí se pueden administrar:
-
-- Géneros
-- Películas o series
-- Reseñas
-
-## Estructura general del proyecto
-
-```text
-TuPrimeraPaginaPerez/
-│
-├── config/
-│   ├── settings.py
-│   ├── urls.py
-│   └── ...
-│
-├── resenas/
-│   ├── migrations/
-│   ├── templates/
-│   │   └── resenas/
-│   │       ├── base.html
-│   │       ├── inicio.html
-│   │       ├── formulario.html
-│   │       ├── lista_peliculas.html
-│   │       └── buscar.html
-│   │
-│   ├── admin.py
-│   ├── forms.py
-│   ├── models.py
-│   ├── urls.py
-│   └── views.py
-│
-├── manage.py
-├── requirements.txt
-├── README.md
-└── db.sqlite3
-```
+## Checklist de requisitos cumplidos
+- [x] Aplicación `pages` con modelo `Page` e imágenes/texto enriquecido.
+- [x] Herencia de HTML en todos los templates.
+- [x] Formularios y clases basadas en vistas (CBV).
+- [x] Login, Signup, Logout (App `accounts`).
+- [x] Modelo `Profile` (avatar, biografía, link).
+- [x] App `messenger` (envío de mensajes y bandeja de entrada).
+- [x] Rutas, About y Home.
+- [x] Todo el contenido registrado en el Admin.
+- [x] `requirements.txt` actualizado y exclusión de BDD/archivos media.
 
 ## Autor
-
-Diego Perez
+**Diego Perez** - Proyecto Final Python/Django.

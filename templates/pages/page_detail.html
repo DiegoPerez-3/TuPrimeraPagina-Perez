@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card">
+        <h2>{{ page.titulo }}</h2>
+        <h4>{{ page.subtitulo }}</h4>
+        <p><small>Categoría: {{ page.categoria }} | Fecha: {{ page.fecha_publicacion|date:"d/m/Y" }} | Autor: {{ page.autor.username }}</small></p>
+        
+        {% if page.imagen %}
+            <img src="{{ page.imagen.url }}" alt="{{ page.titulo }}" style="max-width: 100%; height: auto; margin-bottom: 15px;">
+        {% endif %}
+        
+        <div>
+            {{ page.contenido|safe }}
+        </div>
+
+        <div style="margin-top: 20px;">
+            <a href="{% url 'page_list' %}" class="btn-action">Volver al listado</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'page_update' page.id %}" class="btn-action">Editar</a>
+                <a href="{% url 'page_delete' page.id %}" class="btn-action btn-danger">Borrar</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

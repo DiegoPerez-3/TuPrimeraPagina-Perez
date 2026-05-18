@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Bandeja de Entrada</h2>
+    <div style="margin-bottom: 20px;">
+        <a href="{% url 'message_send' %}" class="btn-action">Nuevo Mensaje</a>
+    </div>
+
+    {% if not mensajes %}
+        <p>No tienes mensajes en tu bandeja de entrada.</p>
+    {% else %}
+        {% for mensaje in mensajes %}
+            <div class="card" style="{% if not mensaje.is_read %}background-color: #d1ecf1; border-left: 5px solid #0c5460;{% endif %}">
+                <h3>{{ mensaje.subject }}</h3>
+                <p><strong>De:</strong> {{ mensaje.sender.username }} | <strong>Fecha:</strong> {{ mensaje.created_at|date:"d/m/Y H:i" }}</p>
+                <p><strong>Estado:</strong> {% if mensaje.is_read %}Leído{% else %}<strong>No leído</strong>{% endif %}</p>
+                <a href="{% url 'message_detail' mensaje.pk %}" class="btn-action">Leer mensaje</a>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

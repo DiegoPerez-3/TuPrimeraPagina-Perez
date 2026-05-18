@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Editar Perfil</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>Datos de Usuario</h3>
+        {{ user_form.as_p }}
+        
+        <h3>Datos de Perfil</h3>
+        {{ profile_form.as_p }}
+        
+        <button type="submit" class="btn-action">Guardar Cambios</button>
+        <a href="{% url 'profile' %}" class="btn-action" style="background-color: #777;">Cancelar</a>
+    </form>
+{% endblock %}

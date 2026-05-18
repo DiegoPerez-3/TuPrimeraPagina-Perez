@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Listado de Páginas</h2>
+
+    <form method="get" style="margin-bottom: 20px;">
+        <input type="text" name="q" value="{{ q }}" placeholder="Buscar por título, subtítulo o categoría..." style="width: 70%; display: inline-block;">
+        <button type="submit" style="width: 25%; display: inline-block;">Buscar</button>
+    </form>
+
+    {% if not has_pages %}
+        <p>No hay páginas aún</p>
+    {% elif not pages %}
+        <p>No se encontraron resultados para la búsqueda.</p>
+    {% else %}
+        {% for page in pages %}
+            <div class="card">
+                <h3>{{ page.titulo }}</h3>
+                <p><strong>Subtítulo:</strong> {{ page.subtitulo }}</p>
+                <p><strong>Categoría:</strong> {{ page.categoria }}</p>
+                <p><strong>Fecha:</strong> {{ page.fecha_publicacion|date:"d/m/Y" }}</p>
+                {% if page.imagen %}
+                    <img src="{{ page.imagen.url }}" alt="{{ page.titulo }}" style="max-width: 200px; display: block; margin: 10px 0;">
+                {% endif %}
+                <a href="{{ page.get_absolute_url }}" class="btn-action">Leer más</a>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
